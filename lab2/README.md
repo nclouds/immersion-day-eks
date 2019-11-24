@@ -100,18 +100,51 @@ Step 3 - Install necessary tools
 ```
 sudo yum update -y
 sudo yum install -y docker git
+curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/bin/aws
 sudo curl --silent --location -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.13.7/bin/linux/amd64/kubectl
 sudo chmod +x /usr/local/bin/kubectl
 sudo yum -y install jq gettext bash-completion
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/0.9.0/eksctl_Linux_amd64.tar.gz" | tar xz -C /tmp
+sudo mv -v /tmp/eksctl /usr/local/bin
+
+kubectl completion bash >>  ~/.bash_completion
+eksctl completion bash >> ~/.bash_completion
+source /etc/profile.d/bash_completion.sh
+
 ```
 <br/>
-Verify all packags are installed
+Configure AWS CLI
+
+```
+aws configure
+```
+Press Enter to select all default options
+
+<br/>
+Make sure AWS CLI is working with proper role
+```
+ aws sts get-caller-identity
+```
+You should see a role with eksworkshop-admin in it
+
+
+Verify that aws, kubectl and eksctl are installed
+```
+aws --version
+kubectl version
+eksctl version 
+```
+
+Verify all kubectl packags are installed
 ```
 for command in kubectl jq envsubst;
    do
       which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND";
    done
 ```
+
 
 
     7  kubectl completion bash >>  ~/.bash_completion
@@ -122,27 +155,6 @@ for command in kubectl jq envsubst;
    12  git clone https://github.com/brentley/ecsdemo-crystal.git
   
 
-```
-
-<br/><br/><br/>
-
-----
-Step 4 - Start Minikube
-----
-
-```
-sudo minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 2 --vm-driver=none
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.minikube
-```
-
-Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config. 
-Verify that you can do the following commands
-
-```
-minikube status
-kubectl get nodes
-kubectl get all
 ```
 
 <br/><br/><br/>
