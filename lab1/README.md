@@ -170,4 +170,10 @@ Get the port number where it's exposed in the localhost. Thest the service
 You may open the Security Group of this instance and open the port-number
 to access the app via your local browser
 
+----
+Step 5 - Shutdown the EC2 Instance
+----
+
+For ease of use and clarity, we will be creating a separate workstation for the next lab. Please shutdown this instance to avoid confusion in the next Lab.
+
 
