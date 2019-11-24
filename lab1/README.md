@@ -20,30 +20,51 @@ Log into the AWS Console, Navigate to EC2. Launch Instance
 
 Pick the following AMI (The first "Ubuntu" AMI you see on the list)
 
+<br/>
+<br/>
+
+
 `Ubuntu Server 18.04 LTS (HVM), SSD Volume Type - ami-06d51e91cea0dac8d (64-bit x86) / ami-02cbed67225579b2c (64-bit Arm)`
+
+<br/>
+<br/>
 
 Pick the following Instance Type
 
+<br/>
+<br/>
+
+
 `t2.micro`
+
+<br/>
+<br/>
+
 
 In the next page, use the following screenshot to pick your settings. You may leave everything else in it's default choice
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/instance_settings.png)
 
+<br/><br/><br/>
 
 Create a name tag with Key "Name" and Value "userX-minikube"
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/name.png)
 
 
+<br/><br/><br/>
+
 Create a new Security Group by Opening the Port 22 to "My IP"
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/sg.png)
 
+<br/><br/><br/>
 
 Create a new Key Pair "userX_kp", click download
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/kp.png)
+
+<br/><br/><br/>
 
 ----
 Step 2 - Connect to the Instance via SSH
