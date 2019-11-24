@@ -1,17 +1,17 @@
 
-# EKS Immersion Day - Lab1
-## Working with Kubernetes and Containers Locally
-###### In the session, we will be provisiong a Ubuntu machine on AWS as a stand-in for your local machine. We will be using minikube as your Kubernetes Cluster. All the kubectl and minkube command you use here can be used on the local minikube installation in our Mac/Windows Desktop
+# EKS Immersion Day - Lab 1
+### (Working with Kubernetes and Containers Locally)
+
+In the session, we will be provisiong a Ubuntu machine on AWS as a stand-in for your local machine. We will be using minikube as your Kubernetes Cluster. All the kubectl and minkube command you use here can be used on the local minikube installation in our Mac/Windows Desktop
 
 
-> Please make sure you have always selected "us-west-2"
-> Substitute userX in doumentation or user1 in screenshot with your user id
+> *Please make sure you have always selected "us-west-2"* as your AWS Region
 
+> *Substitute userX in doumentation or user1 in screenshot with your user id*
 
-Step 1
-
-
-Creating a Workstation on AWS (to act as local environment)
+----
+Step 1 - Provisioning on AWS (to act as local environment)
+----
 
 
 Navigate to EC2
