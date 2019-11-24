@@ -3,7 +3,7 @@
 * Substitute userX in doumentation or user2 in screenshot with your user
 
 
-Lab1: Working with Containers and Docker locally
+Lab1: Working with Containers and Kubernetes locally
 
 Creating a Workstation on AWS (to act as local environment)
 
@@ -12,15 +12,23 @@ Navigate to EC2
 
 Launch Instance
 
+Pick the following AMI
+
 Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0a85857bfc5345c38 (64-bit x86) / ami-0c155d582e592bec0 (64-bit Arm)
 
-Instance Type: t2.micro
 
-See below for other options to pick. Make sure you pick IAM Role as "ecslabworkstationprofile"
+
+Pick the following Instance Type
+
+t2.micro
+
+
 
 image
 
 Leave everything else as is
+
+Create a name tag "userX-minikube"
 
 Create a new Security Group by Opening the Port 22 to "My IP"
 
@@ -30,83 +38,64 @@ For Mac Users
 
 Prepare the private key
 
-chmod 600 <PATH-TO-KEY>/user2_kp.pem 
+chmod 600 <PATH-TO-KEY>/userX_kp.pem 
 
 After the instance is ready
 
-ssh -i <PATH-TO-KEY>/user2_kp.pem ec2-user@35.166.37.102
+ssh -i <PATH-TO-KEY>/userX_kp.pem ec2-user@<PUBLIC-IP>
 
 For Windows Users
 
 Connecting via SSH for Windows Users
 https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/
 
-Update to the latest AWS CLI:
-$ sudo yum update -y
-Install docker:
-$ sudo yum install -y docker git
-$ sudo service docker start
 
-Add ec2-user to the docker group so you can execute Docker commands without using sudo:
-$ sudo usermod -a -G docker ec2-user
+sudo apt-get update 
+sudo apt-get install docker.io -y
 
-Exit and SSH in again to pick up the new permissions.
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
 
-$ docker info
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 
 
-5. Prepping the Docker images
+sudo minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 2 --vm-driver=none
+
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+sudo chown -R ubuntu:ubuntu /home/ubuntu/.minikube
+
+Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config
+
+minikube status
+kubectl get nodes
+kubectl get all
+
+git clone https://github.com/brentley/ecsdemo-nodejs.git
+
+Checkout the contents of the sample application
+
+cd ecsdemo-nodejs
+cat kubernetes/deployment.yaml 
+cat Dockerfile
 
 
-git clone https://github.com/nclouds/ecs-bootcamp-sample
-
-cd web
-docker build -t userX_web .
-
-docker images
-
-docker run -d -p 3000:3000 userX_web
-
-docker ps
-
-curl localhost:3000/web
-
-Open up the Security Group of Workstation, so that you can see the page in your local browser
+kubectl apply -f kubernetes/deployment.yaml
 
 
-Open the URL <public-ip>:3000/web
+kubectl get all
+kubectl get pod <pod-name>
+kubectl describe pod  <pod-name>
+kubectl logs pod/<pod-name> | less
 
 
-Repeat the same steps for userX_api
+kubectl expose deployment ecsdemo-nodejs --type=NodePort 
+kubectl get service ecsdemo-nodejs
+
+Get the port number
+
+wget http://localhost:<port-number>/
 
 
-Creating a Registry
-
-Navigate to ECR
-
-Create two registries - userX_web and userX_api
-
-
-Configure AWS CLI
-
-aws configure
-
-
-Confirm you can login
-
-aws ecr get-login
-
-Log into repo
-
-`aws ecr get-login --region us-west-2 --no-include-email `
-
-Push the docker images to Repo
-
-docker tag userX_web:latest 224820028258.dkr.ecr.us-west-2.amazonaws.com/userX_web:latest
-docker push 224820028258.dkr.ecr.us-west-2.amazonaws.com/userX_web:latest
-docker tag userX_api:latest 224820028258.dkr.ecr.us-west-2.amazonaws.com/userX_api:latest
-docker push 224820028258.dkr.ecr.us-west-2.amazonaws.com/userX_api:latest
-
-
+You may open the Security Group of this instance and open the port-number
+to access the app via your local browser
 
 
