@@ -122,7 +122,8 @@ aws configure
 Press Enter to select all default options
 
 <br/>
-Make sure AWS CLI is working with proper role
+Make sure AWS CLI is working with proper role 
+
 ```
  aws sts get-caller-identity
 ```
@@ -132,8 +133,7 @@ You should see a role with eksworkshop-admin in it
 Verify that aws, kubectl and eksctl are installed
 ```
 aws --version
-kubectl version
-eksctl version 
+#should show aws-cli/1.16.290 or above
 ```
 
 Verify all kubectl packags are installed
@@ -147,23 +147,37 @@ for command in kubectl jq envsubst;
 ----
 Step 4 - Create a EKS Cluster using EKS
 ----
-<br/>
+<br/> 
 ```
- aws eks get-token --cluster-name user1 --region us-west-2
-```
-
-*This step will take close to 10 mins*
-
-<br/><br/>
-----
-Step 4 - Deploy the sample applications
-----
-<br/>
-```
- aws eks get-token --cluster-name user1 --region us-west-2
+  eksctl create cluster --name=user1  --nodes=3 --alb-ingress-access --region=${AWS_REGION}
 ```
 
 *This step will take close to 10 mins*
+
+<br/>
+
+This will create a kube config file locally for your kubectl command
+ 
+<br/> 
+```
+  kubectl get nodes
+```
+
+
+
+----
+Step 5 - Deploy the sample applications 
+----
+<br/>
+Download thee sample applications 
+```
+cd ~
+git clone https://github.com/brentley/ecsdemo-frontend.git
+git clone https://github.com/brentley/ecsdemo-nodejs.git
+git clone https://github.com/brentley/ecsdemo-crystal.git
+```
+
+
 
 
 
