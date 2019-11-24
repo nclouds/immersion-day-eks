@@ -48,20 +48,20 @@ In the next page, use the following screenshot to pick your settings.
 > ### Make sure you pick "eksworkshop-admin" as the IAM Role
 You may leave everything else in it's default choice
 
-![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/instance_settings.png)
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab2/instance.png)
 
 <br/><br/><br/>
 
 Create a name tag with Key "Name" and Value "userX-workstation"
 
-![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/name.png)
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab2/tag.png)
 
 
 <br/><br/><br/>
 
 Create a new Security Group by Opening the Ports 22, 80, 443 and 8080 to "My IP"
 
-![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/sg.png)
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab2/sg.png)
 
 <br/><br/><br/>
 
