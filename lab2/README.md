@@ -148,6 +148,7 @@ for command in kubectl jq envsubst;
 Step 4 - Create a EKS Cluster using EKS
 ----
 <br/> 
+
 ```
   eksctl create cluster --name=user1  --nodes=3 --alb-ingress-access --region=${AWS_REGION}
 ```
@@ -156,10 +157,12 @@ Step 4 - Create a EKS Cluster using EKS
 
 <br/>
 
-This will create a kube config file locally for your kubectl command
+This will create a kube config file locally for your kubectl command. Verify that you can see the cluster info
  
 <br/> 
+
 ```
+  kubectl get all
   kubectl get nodes
 ```
 
@@ -170,6 +173,7 @@ Step 5 - Deploy the sample applications
 ----
 <br/>
 Download thee sample applications 
+
 ```
 cd ~
 git clone https://github.com/brentley/ecsdemo-frontend.git
