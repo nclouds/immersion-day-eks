@@ -79,71 +79,92 @@ Look up the Public IP address of your EC2 Instance
 
 ```
    chmod 600 <PATH-TO-KEY>/userX_kp.pem 
-   ssh -i <PATH-TO-KEY>/userX_kp.pem ec2-user@<PUBLIC-IP>
+   ssh -i <PATH-TO-KEY>/userX_kp.pem ubuntu@<PUBLIC-IP>
 ```
 
 *For Windows Users*
 
-   Please follow the instructions [here](https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/)
+   You will need to create a private key to use in PuTTY. Please follow the instructions [here](https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/)
+
+<br/><br/><br/>
 
 ----
 Step 3 - Install necessary tools
 ----
 
-
+```
 sudo apt-get update 
 sudo apt-get install docker.io -y
-
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
-
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+```
+
+<br/><br/><br/>
 
 ----
 Step 4 - Start Minikube
 ----
 
+```
 sudo minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 2 --vm-driver=none
-
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.minikube
+```
 
-Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config
+Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config. 
+Verify that you can do the following commands
 
+```
 minikube status
 kubectl get nodes
 kubectl get all
+```
 
+<br/><br/><br/>
 
 ----
 Step 4 - Deploy and Test the Sample Application
 ----
 
-
-
+```
+cd ~
 git clone https://github.com/brentley/ecsdemo-nodejs.git
+```
 
 Checkout the contents of the sample application
 
-cd ecsdemo-nodejs
+```
+cd ~/ecsdemo-nodejs
 cat kubernetes/deployment.yaml 
 cat Dockerfile
+```
 
+Deploy the application 
 
+```
+cd ~/ecsdemo-nodejs
 kubectl apply -f kubernetes/deployment.yaml
+```
 
+Verify the deployment with these commands
 
+```
 kubectl get all
 kubectl get pod <pod-name>
 kubectl describe pod  <pod-name>
 kubectl logs pod/<pod-name> | less
+```
 
+Expose this deployment as a service
 
+```
 kubectl expose deployment ecsdemo-nodejs --type=NodePort 
 kubectl get service ecsdemo-nodejs
+```
 
-Get the port number
+Get the port number where it's exposed in the localhost. Thest the service
 
-wget http://localhost:<port-number>/
+curl http://localhost:<port-number>/
 
 
 You may open the Security Group of this instance and open the port-number
