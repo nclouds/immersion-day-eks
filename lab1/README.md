@@ -70,21 +70,21 @@ Create a new Key Pair "userX_kp", click download
 Step 2 - Connect to the Instance via SSH
 ----
 
+Look up the Public IP address of your EC2 Instance
 
-For Mac Users
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/public_ip.png)
 
-Prepare the private key
 
-chmod 600 <PATH-TO-KEY>/userX_kp.pem 
+*For Mac Users*
 
-After the instance is ready
+```
+   chmod 600 <PATH-TO-KEY>/userX_kp.pem 
+   ssh -i <PATH-TO-KEY>/userX_kp.pem ec2-user@<PUBLIC-IP>
+```
 
-ssh -i <PATH-TO-KEY>/userX_kp.pem ec2-user@<PUBLIC-IP>
+*For Windows Users*
 
-For Windows Users
-
-Connecting via SSH for Windows Users
-https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/
+   Please follow the instructions [here](https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/)
 
 ----
 Step 3 - Install necessary tools
