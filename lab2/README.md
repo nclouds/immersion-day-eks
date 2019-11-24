@@ -158,29 +158,66 @@ Step 4 - Create a EKS Cluster using EKS
 <br/>
 
 This will create a kube config file locally for your kubectl command. Set these variables for proper configuration.
+#### Be sure to substitue userXYZ with your userId
+```
+export STACK_NAME=$(eksctl get nodegroup --cluster userXYZ -o json | jq -r '.[].StackName')
+```
 
 ```
-INSTANCE_PROFILE_ARN=$(aws cloudformation describe-stacks --stack-name userX | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceProfileARN") | .OutputValue')
 INSTANCE_PROFILE_ARN=$(aws cloudformation describe-stacks --stack-name $STACK_NAME | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceProfileARN") | .OutputValue')
 ROLE_NAME=$(aws cloudformation describe-stacks --stack-name $STACK_NAME | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceRoleARN") | .OutputValue' | cut -f2 -d/)
 echo "export ROLE_NAME=${ROLE_NAME}" | tee -a ~/.bash_profile
 echo "export INSTANCE_PROFILE_ARN=${INSTANCE_PROFILE_ARN}" | tee -a ~/.bash_profile
 source ~/.bash_profile
 ```
-
  
-<br/> 
-
-```
-```
-
 <br/> 
 
 Verify that you can see the cluster info
 
 ```
-  kubectl get all
-  kubectl get nodes
+kubectl get all
+kubectl describe nodes
+```
+
+<br/><br/>
+
+----
+Step 5 - Deploy Kubernetes Dashboard 
+----
+<br/>
+
+Deploy the Dashboard
+
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+Run a Proxy so that you can access it on the EC2 instance
+
+```
+kubectl proxy --port=8080 --address='0.0.0.0' --disable-filter=true &
+```
+
+Copy the token to authenticate in the dashboard
+> *replace userX with userid*
+```
+aws eks get-token --cluster-name userX --region us-west-2
+```
+
+Kubernets Dashboard can only be accessed via the localhost URL. In order to access it on the EC2 machine, we either need to open the browser on the machine (which we can't do since it's headless) or open a SSH Tunnel which will forward the requests.
+
+```
+ssh -i <KEY-PATH>/user1_kp.pem  -L 8080:localhost:8080 ec2-user@<PUBLIC-IP>
+
+```
+
+
+
+
+Load the dashboard URL
+```
+http://<PUBLIC-IP>:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 ```
 
 
