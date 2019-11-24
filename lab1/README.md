@@ -95,7 +95,7 @@ Step 3 - Install necessary tools
 ```
 sudo apt-get update 
 sudo apt-get install docker.io -y
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
+curl -Lo https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
 ```
 
@@ -164,7 +164,7 @@ kubectl get service ecsdemo-nodejs
 
 Get the port number where it's exposed in the localhost. Thest the service
 
-curl http://localhost:<port-number>/
+`curl http://localhost:<port-number>/`
 
 
 You may open the Security Group of this instance and open the port-number
