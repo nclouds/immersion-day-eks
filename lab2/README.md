@@ -157,9 +157,26 @@ Step 4 - Create a EKS Cluster using EKS
 
 <br/>
 
-This will create a kube config file locally for your kubectl command. Verify that you can see the cluster info
+This will create a kube config file locally for your kubectl command. Set these variables for proper configuration.
+
+```
+INSTANCE_PROFILE_ARN=$(aws cloudformation describe-stacks --stack-name userX | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceProfileARN") | .OutputValue')
+INSTANCE_PROFILE_ARN=$(aws cloudformation describe-stacks --stack-name $STACK_NAME | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceProfileARN") | .OutputValue')
+ROLE_NAME=$(aws cloudformation describe-stacks --stack-name $STACK_NAME | jq -r '.Stacks[].Outputs[] | select(.OutputKey=="InstanceRoleARN") | .OutputValue' | cut -f2 -d/)
+echo "export ROLE_NAME=${ROLE_NAME}" | tee -a ~/.bash_profile
+echo "export INSTANCE_PROFILE_ARN=${INSTANCE_PROFILE_ARN}" | tee -a ~/.bash_profile
+source ~/.bash_profile
+```
+
  
 <br/> 
+
+```
+```
+
+<br/> 
+
+Verify that you can see the cluster info
 
 ```
   kubectl get all
@@ -172,7 +189,7 @@ This will create a kube config file locally for your kubectl command. Verify tha
 Step 5 - Deploy the sample applications 
 ----
 <br/>
-Download thee sample applications 
+Download these sample applications 
 
 ```
 cd ~
