@@ -9,36 +9,41 @@ In the session, we will be provisiong a Ubuntu machine on AWS as a stand-in for 
 
 > *Substitute userX in doumentation or user1 in screenshot with your user id*
 
+   
+     
+     
 ----
 Step 1 - Provisioning an EC2 Instance on AWS (to act as local environment)
 ----
 
 Log into the AWS Console, Navigate to EC2. Launch Instance
 
-Pick the following AMI
+Pick the following AMI (The first "Ubuntu" AMI you see on the list)
 
-    
-
-Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0a85857bfc5345c38 (64-bit x86) / ami-0c155d582e592bec0 (64-bit Arm)
-
-
+`Ubuntu Server 18.04 LTS (HVM), SSD Volume Type - ami-06d51e91cea0dac8d (64-bit x86) / ami-02cbed67225579b2c (64-bit Arm)`
 
 Pick the following Instance Type
 
-t2.micro
+`t2.micro`
+
+In the next page, use the following screenshot to pick your settings. You may leave everything else in it's default choice
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/instance_settings.png)
 
 
+Create a name tag with Key "Name" and Value "userX-minikube"
 
-image
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/name.png)
 
-Leave everything else as is
-
-Create a name tag "userX-minikube"
 
 Create a new Security Group by Opening the Port 22 to "My IP"
 
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/sg.png)
+
+
 Create a new Key Pair "userX_kp", click download
 
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/kp.png)
 
 ----
 Step 2 - Connect to the Instance via SSH
