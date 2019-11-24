@@ -144,17 +144,16 @@ for command in kubectl jq envsubst;
       which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND";
    done
 ```
-
-
-
-    7  kubectl completion bash >>  ~/.bash_completion
-    8  source /etc/profile.d/bash_completion.sh
-    9  cd ~
-   10  git clone https://github.com/brentley/ecsdemo-frontend.git
-   11  git clone https://github.com/brentley/ecsdemo-nodejs.git
-   12  git clone https://github.com/brentley/ecsdemo-crystal.git
-  
-
+<br/><br/>
+----
+Step 4 - Create a EKS Cluster using EKS
+----
+<br/>
 ```
+aws eks get-token --cluster-name user1 --region us-west-2
+```
+*This step will take close to 10 mins*
+
+
 
 <br/><br/><br/>
