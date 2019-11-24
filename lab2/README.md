@@ -1,19 +1,21 @@
 
-# EKS Immersion Day - Lab 1
-### (Working with Kubernetes and Containers Locally)
+# EKS Immersion Day - Lab 2
+### (Working with EKS)
 
-In the session, we will be provisiong a Ubuntu machine on AWS as a stand-in for your local machine. We will be using minikube as your Kubernetes Cluster. All the kubectl and minkube command you use here can be used on the local minikube installation in our Mac/Windows Desktop
+In the session, we will be provisiong a Amazon Linux machine on AWS as a stand-in for your local machine. This will act as a local workstation to manage and deploy to EKS. All the AWS CLI commands used here can be executed in your Local machine, after you have 
+![configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) your AWS CLI with proper credentails assoicated with a IAM User.
+<br/><br/>
+We will also be using this machine as a Jenkins Server in the following lab.
 
 
 > *Please make sure you have always selected "us-west-2"* as your AWS Region
 
 > *Substitute userX in doumentation or user1 in screenshot with your user id*
 
-   
      
      
 ----
-Step 1 - Provisioning an EC2 Instance on AWS (to act as local environment)
+Step 1 - Provisioning an EC2 Instance on AWS (to act as local workstation)
 ----
 
 Log into the AWS Console, Navigate to EC2. Launch Instance
