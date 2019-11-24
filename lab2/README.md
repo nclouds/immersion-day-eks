@@ -1,21 +1,19 @@
 
-# EKS Immersion Day - Lab 2
-### (Working with EKS)
+# EKS Immersion Day - Lab 1
+### (Working with Kubernetes and Containers Locally)
 
-In the session, we will be provisiong a Amazon Linux machine on AWS as a stand-in for your local machine. This will act as a local workstation to manage and deploy to EKS. All the AWS CLI commands used here can be executed in your Local machine, after you have 
-![configured](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) your AWS CLI with proper credentails assoicated with a IAM User.
-<br/><br/>
-We will also be using this machine as a Jenkins Server in the following lab.
+In the session, we will be provisiong a Ubuntu machine on AWS as a stand-in for your local machine. We will be using minikube as your Kubernetes Cluster. All the kubectl and minkube command you use here can be used on the local minikube installation in our Mac/Windows Desktop
 
 
 > *Please make sure you have always selected "us-west-2"* as your AWS Region
 
 > *Substitute userX in doumentation or user1 in screenshot with your user id*
 
+   
      
      
 ----
-Step 1 - Provisioning an EC2 Instance on AWS (to act as local workstation)
+Step 1 - Provisioning an EC2 Instance on AWS (to act as local environment)
 ----
 
 Log into the AWS Console, Navigate to EC2. Launch Instance
@@ -72,83 +70,110 @@ Create a new Key Pair "userX_kp", click download
 Step 2 - Connect to the Instance via SSH
 ----
 
+Look up the Public IP address of your EC2 Instance
 
-For Mac Users
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/public_ip.png)
 
-Prepare the private key
 
-chmod 600 <PATH-TO-KEY>/userX_kp.pem 
+*For Mac Users*
 
-After the instance is ready
+```
+   chmod 600 <PATH-TO-KEY>/userX_kp.pem 
+   ssh -i <PATH-TO-KEY>/userX_kp.pem ubuntu@<PUBLIC-IP>
+```
 
-ssh -i <PATH-TO-KEY>/userX_kp.pem ec2-user@<PUBLIC-IP>
+*For Windows Users*
 
-For Windows Users
+   You will need to create a private key to use in PuTTY. Please follow the instructions [here](https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/)
 
-Connecting via SSH for Windows Users
-https://linuxacademy.com/guide/17385-use-putty-to-access-ec2-linux-instances-via-ssh-from-windows/
+<br/><br/><br/>
 
 ----
 Step 3 - Install necessary tools
 ----
 
-
+```
 sudo apt-get update 
 sudo apt-get install docker.io -y
-
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
-
+curl -Lo https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv kubectl /usr/local/bin/
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+```
+
+<br/><br/><br/>
 
 ----
 Step 4 - Start Minikube
 ----
 
+```
 sudo minikube start --extra-config=kubeadm.ignore-preflight-errors=NumCPU --force --cpus 2 --vm-driver=none
-
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
 sudo chown -R ubuntu:ubuntu /home/ubuntu/.minikube
+```
 
-Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config
+Make sure minikube has installed a Kubernetes configuration file at ~/.kube/config. 
+Verify that you can do the following commands
 
+```
 minikube status
 kubectl get nodes
 kubectl get all
+```
 
+<br/><br/><br/>
 
 ----
 Step 4 - Deploy and Test the Sample Application
 ----
 
-
-
+```
+cd ~
 git clone https://github.com/brentley/ecsdemo-nodejs.git
+```
 
 Checkout the contents of the sample application
 
-cd ecsdemo-nodejs
+```
+cd ~/ecsdemo-nodejs
 cat kubernetes/deployment.yaml 
 cat Dockerfile
+```
 
+Deploy the application 
 
+```
+cd ~/ecsdemo-nodejs
 kubectl apply -f kubernetes/deployment.yaml
+```
 
+Verify the deployment with these commands
 
+```
 kubectl get all
 kubectl get pod <pod-name>
 kubectl describe pod  <pod-name>
 kubectl logs pod/<pod-name> | less
+```
 
+Expose this deployment as a service
 
+```
 kubectl expose deployment ecsdemo-nodejs --type=NodePort 
 kubectl get service ecsdemo-nodejs
+```
 
-Get the port number
+Get the port number where it's exposed in the localhost. Thest the service
 
-wget http://localhost:<port-number>/
+`curl http://localhost:<port-number>/`
 
 
 You may open the Security Group of this instance and open the port-number
 to access the app via your local browser
+
+----
+Step 5 - Shutdown the EC2 Instance
+----
+
+For ease of use and clarity, we will be creating a separate workstation for the next lab. Please shutdown this instance to avoid confusion in the next Lab.
 
 
