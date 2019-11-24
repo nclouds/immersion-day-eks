@@ -108,7 +108,6 @@ sudo chmod +x /usr/local/bin/kubectl
 sudo yum -y install jq gettext bash-completion
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/0.9.0/eksctl_Linux_amd64.tar.gz" | tar xz -C /tmp
 sudo mv -v /tmp/eksctl /usr/local/bin
-
 kubectl completion bash >>  ~/.bash_completion
 eksctl completion bash >> ~/.bash_completion
 source /etc/profile.d/bash_completion.sh
@@ -150,9 +149,24 @@ Step 4 - Create a EKS Cluster using EKS
 ----
 <br/>
 ```
-aws eks get-token --cluster-name user1 --region us-west-2
+ aws eks get-token --cluster-name user1 --region us-west-2
 ```
+
 *This step will take close to 10 mins*
+
+<br/><br/>
+----
+Step 4 - Deploy the sample applications
+----
+<br/>
+```
+ aws eks get-token --cluster-name user1 --region us-west-2
+```
+
+*This step will take close to 10 mins*
+
+
+
 
 
 
