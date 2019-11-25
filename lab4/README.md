@@ -65,11 +65,11 @@ helm install --name mywebserver bitnami/nginx
  
 ```
 
-Describe the service and get the URL
+Describe the service and get the Load Balancer URL
 <br/>
 
 ```
-service/mywebserver-nginx
+kubectl get service  mywebserver-nginx
 ```
 
 
