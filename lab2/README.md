@@ -217,7 +217,7 @@ ssh -i <KEY-PATH>/user1_kp.pem  -L 8080:localhost:8080 ec2-user@<PUBLIC-IP>
 
 Load the dashboard URL
 ```
-http://<PUBLIC-IP>:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://localhost:8080/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
 ```
 
 
@@ -246,7 +246,7 @@ kubectl apply -f kubernetes/service.yaml
 ```
 
 <br/>
-Deploy ecsdemo-nodejs
+Deploy ecsdemo-crystal
 
 ```
 cd ~/ecsdemo-crystal
@@ -255,7 +255,7 @@ kubectl apply -f kubernetes/service.yaml
 ```
 
 <br/>
-Deploy ecsdemo-nodejs
+Deploy ecsdemo-frontend
 
 ```
 cd ~/ecsdemo-frontend
@@ -269,6 +269,8 @@ Find the Load Balancer URL of the service
 ```
  kubectl get service ecsdemo-frontend -o wide
 ```
+
+Load the URL in your browser to test your application
 
 
 
