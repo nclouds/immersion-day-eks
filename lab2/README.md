@@ -235,7 +235,40 @@ git clone https://github.com/brentley/ecsdemo-nodejs.git
 git clone https://github.com/brentley/ecsdemo-crystal.git
 ```
 
+<br/>
+Deploy ecsdemo-nodejs
 
+```
+cd ~
+cd ~/ecsdemo-nodejs
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+```
+
+<br/>
+Deploy ecsdemo-nodejs
+
+```
+cd ~/ecsdemo-crystal
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+```
+
+<br/>
+Deploy ecsdemo-nodejs
+
+```
+cd ~/ecsdemo-frontend
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+```
+
+<br/>
+Find the Load Balancer URL of the service
+
+```
+ kubectl get service ecsdemo-frontend -o wide
+```
 
 
 
