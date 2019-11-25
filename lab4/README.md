@@ -1,5 +1,5 @@
 
-# EKS Immersion Day - Lab 3
+# EKS Immersion Day - Lab 4
 ## Deploying to EKS via Helm
 
 In the session, we will continue to use the Workstation used in the preceeding sessions.
