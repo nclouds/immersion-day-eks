@@ -1,8 +1,8 @@
 # AWS Immersion Day - Containers
 
-# Delivered by nClouds
+### Delivered by (nClouds)[https://www.nclouds.com/]
 
-Prerequisites
+#### Prerequisites
 
 1) Window or Mac Laptop with latest version of Chrome/Firefox/Safari/IE
 
@@ -15,7 +15,7 @@ Prerequisites
 5) A personal account in Github.com to create a public repo with sample code
 
 
-# Labs
+#### Labs
 
 [Lab 1](https://github.com/nclouds/immersion-day-eks/blob/master/lab1/README.md)
 
@@ -28,7 +28,7 @@ Prerequisites
 
 
 
-# Notes
+#### Notes
 
 * Please make sure you have always selected "us-west-2" (Unless your instructor assigns you a different region)
 * Substitute userX in doumentation or user2 in screenshots with your user
