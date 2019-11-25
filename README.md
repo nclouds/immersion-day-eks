@@ -12,7 +12,7 @@
 
 4) Ability to use "vi" in Linux Terminal. If unable to do so, download the graphical SCP tool, Cyberduck (https://cyberduck.io/). You will be editing the files locally and scp-ing it into the workstation.
 
-5) A personal account in Github.com to create a public repo with sample code
+5) A personal account in Github to create a public repo with sample code
 
 
 ### Labs
