@@ -22,7 +22,7 @@ Log into Github amd clone the following repo
 <br/>
 
 ----
-Step 2 - Create a ECR Rep0
+Step 2 - Create a ECR Repo
 ----
 
 In AWS Console, navigate to ECR.
