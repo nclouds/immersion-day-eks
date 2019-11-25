@@ -14,7 +14,7 @@ Step 1 - Add a sample project to your Github repo
 ----
 
 <br/>
-Log into Github amd clone the following repo
+Log into Github amd fork the following repo
 
 > https://github.com/rnzsgh/eks-workshop-sample-api-service-go
 
