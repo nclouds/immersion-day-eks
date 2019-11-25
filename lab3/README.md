@@ -20,6 +20,7 @@ Log into Github amd clone the following repo
 
 
 <br/>
+
 ----
 Step 2 - Create a ECR Rep0
 ----
@@ -35,6 +36,7 @@ You will see your repo listed with a URL. You will be using this later
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/ecr_repo.png)
 
 <br/>
+
 ----
 Step 3 - Prep the workstation to run Docker commands
 ----
@@ -53,6 +55,7 @@ docker info
 ```
 
 <br/>   
+
 ----
 Step 4 - Installing and Configuring Jenkins
 ----
@@ -72,24 +75,27 @@ http://<Public-IP>:8081
 Follow directions to paste the initial password
 
 
-<br/>
+<br/><br/>
 Click Selected Plugins
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/install_selected.png)
 
-<br/>
+<br/><br/>
+
 Set an admin username and password
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/admin_user.png)
 
 
-<br/>
+<br/><br/>
 Go to "Manage Jenkins" >> "Manage Plugins"
 
 Go to Available Tab and Search for "Kubernetes"
 Pick the "Kubernetes Continuous Deploy". 
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/search.png)
+
+<br/><br/>
 
 Verify the maintainer to make sure you have picked the right one. Maintainer should be "Azure DevOps Team"
 
