@@ -1,6 +1,6 @@
 
 # EKS Immersion Day - Lab 3
-### Deploying to EKS via Jenkins
+## Deploying to EKS via Jenkins
 
 In the session, we will continue to use the Workstation used in the preceeding sessions.
 
@@ -24,10 +24,15 @@ Log into Github amd clone the following repo
 Step 2 - Create a ECR Rep0
 ----
 
-In AWS Console, navigate to ECR
+In AWS Console, navigate to ECR.
 
+Create a new repsitory. Name it userX_samplego
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/repo_create.png)
 
 You will see your repo listed with a URL. You will be using this later
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/ecr_repo.png)
 
 
 ----
@@ -46,8 +51,7 @@ Logout and Login again and make sure you can run Docker commands
 ```
 docker info
 ```
-
-
+<br/>
      
 ----
 Step 4 - Installing and Configuring Jenkins
@@ -71,9 +75,12 @@ Follow directions to paste the initial password
 <br/>
 Click Selected Plugins
 
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/install_selected.png)
 
 <br/>
 Set an admin username and password
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/admin_user.png)
 
 
 <br/>
@@ -82,20 +89,30 @@ Go to "Manage Jenkins" >> "Manage Plugins"
 Go to Available Tab and Search for "Kubernetes"
 Pick the "Kubernetes Continuous Deploy". 
 
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/search.png)
 
 Verify the maintainer to make sure you have picked the right one. Maintainer should be "Azure DevOps Team"
 
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/kub_plugin.png)
 
+Click "Install without restart"
 
 
 ----
 Step 5 - Setting up a Job in Jenkins
 ----
 
+Click on "Add Job"
 
+Follow through with these settings
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/config.png)
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/git.png)
+
+We won't be adding a trigger for this build.
 
 Add a Build Step "Execute Shell"
-
 
 Copy paste the following contents. 
 > ##### Make sure you subtitute the Repo URL from Step 2 
@@ -107,15 +124,22 @@ $(aws ecr get-login --no-include-email)
 docker build --tag $REPOSITORY_URI:$TAG .
 docker push $REPOSITORY_URI:$TAG
 sed -i 's@CONTAINER_IMAGE@'"$REPOSITORY_URI:$TAG"'@' hello-k8s.yml
-
 ```
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/build_stage.png)
 
 Add one more Build Step "Deploy to Kubernetes"
 
+
 In KubeConfig, click "Add" >> "Jenkins"
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/credentials.png)
 
 
 Once you finish setting up, a new entry will show up in Kubeconfig. Select that entry.
+
+![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/deploy_stage.png)
+
 
 <br/>
 Click "Save"
