@@ -62,6 +62,7 @@ Step 4 - Installing and Configuring Jenkins
 
 ```
 sudo yum install -y java-1.8.0-openjdk-devel
+wget http://mirrors.jenkins.io/war-stable/latest/jenkins.war
 java -jar jenkins.war --httpPort=8081 > /tmp/jenkins.out 2>&1 &
 ```
 <br/>
