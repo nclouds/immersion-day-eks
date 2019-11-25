@@ -74,7 +74,11 @@ http://<Public-IP>:8081
 
 <br/>
 Follow directions to paste the initial password
+The initial password will be in the following file
 
+```
+cat /home/ec2-user/.jenkins/secrets/initialAdminPassword
+```
 
 <br/><br/>
 Click Selected Plugins
