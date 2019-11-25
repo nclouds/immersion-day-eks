@@ -10,7 +10,7 @@ In the session, we will continue to use the Workstation used in the preceeding s
 
 
 ----
-Step 1 - Add a sample project to your Github repo
+Step 1 - Install Helm
 ----
 
 Install Helm
@@ -54,6 +54,10 @@ Add the account and init Helm
 kubectl apply -f ~/service-acct.yaml
 helm init --service-account tiller
 ```
+
+----
+Step 2 - Install a chart through help
+----
 
 <br/>
 
