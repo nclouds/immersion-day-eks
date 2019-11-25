@@ -19,7 +19,7 @@ Log into Github amd clone the following repo
 > https://github.com/rnzsgh/eks-workshop-sample-api-service-go
 
 
-
+<br/>
 ----
 Step 2 - Create a ECR Rep0
 ----
@@ -34,7 +34,7 @@ You will see your repo listed with a URL. You will be using this later
 
 ![inst](https://github.com/nclouds/immersion-day-eks/blob/master/lab3/ecr_repo.png)
 
-
+<br/>
 ----
 Step 3 - Prep the workstation to run Docker commands
 ----
@@ -51,8 +51,8 @@ Logout and Login again and make sure you can run Docker commands
 ```
 docker info
 ```
-<br/>
-     
+
+<br/>   
 ----
 Step 4 - Installing and Configuring Jenkins
 ----
@@ -97,6 +97,7 @@ Verify the maintainer to make sure you have picked the right one. Maintainer sho
 
 Click "Install without restart"
 
+<br/>   
 
 ----
 Step 5 - Setting up a Job in Jenkins
@@ -144,6 +145,7 @@ Once you finish setting up, a new entry will show up in Kubeconfig. Select that 
 <br/>
 Click "Save"
 
+<br/>   
 
 ----
 Step 6 - Trigger the Job and check the Deployment
@@ -152,12 +154,17 @@ Step 6 - Trigger the Job and check the Deployment
 Click "Build Now"
 
 
-<br/><br/><br/>
-
+<br/><br/>
 
 ----
 Step 7 - Check the URL using the loadbalancer URL
 ----
+
+Find the service URL by the following commands
+
+```
+kubectl get service/hello-k8s
+```
 
 <br/>
 
