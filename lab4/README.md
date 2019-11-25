@@ -56,7 +56,7 @@ helm init --service-account tiller
 ```
 
 ----
-Step 2 - Install a chart through help
+Step 2 - Install a chart through Helm
 ----
 
 <br/>
