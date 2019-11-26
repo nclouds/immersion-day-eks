@@ -27,7 +27,7 @@ Pick the following AMI (The first AMI you see on the list)
 <br/>
 
 
-`Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c5204531f799e0c6 (64-bit x86) / ami-03b4aa59bf41f9ed4 (64-bit Arm)`
+`Amazon Linux 2 AMI (HVM), SSD Volume Type - ami-0c5204531f799e0c6 (64-bit x86)
 
 <br/>
 <br/>
